@@ -53,7 +53,7 @@ function getTypeScriptTypeAlias(type) {
 
   return formatBlock`
     type ${title} = ${
-    properties ? getParams(properties) : content.type.names.join(' | ')
+    properties ? getParams(properties) : content.type?.names.join(' | ')
   }
     type ${title}Aliased = ${title}
   `
@@ -140,9 +140,8 @@ function getTypeScriptFnDefinition(fn) {
 
   const params = getParams(args, { leftBorder: '(', rightBorder: ')' })
   const returns = getType(
-    content.returns && content.returns[0] && content.returns[0].type.names
+    content.returns && content.returns[0] && content.returns[0].type?.names
   )
-
   return formatBlock`
     function ${title} ${params}: ${returns}
     namespace ${title} {}
@@ -154,7 +153,7 @@ function getTypeScriptFPFnDefinition(fn) {
 
   const type = getFPFnType(
     args,
-    content.returns && content.returns[0] && content.returns[0].type.names
+    content.returns && content.returns[0] && content.returns[0].type?.names
   )
 
   return formatBlock`
@@ -203,7 +202,7 @@ function getTypeScriptConstantsModuleDefinition(constants, fnSuffix) {
   const definition = formatBlock`
     declare module '${moduleName}' {
       ${constants
-        .map((c) => `export const ${c.name}: ${c.type.names.join(' | ')}`)
+        .map((c) => `export const ${c.name}: ${c.type?.names.join(' | ')}`)
         .join('\n')}
     }
   `
@@ -250,7 +249,7 @@ function getTypeScriptInterfaceDefinition(fn) {
   const { title, args, content } = fn
   const params = getParams(args, { leftBorder: '(', rightBorder: ')' })
   const returns = getType(
-    content.returns && content.returns[0] && content.returns[0].type.names
+    content.returns && content.returns[0] && content.returns[0].type?.names
   )
 
   return `${title}${params}: ${returns}`
@@ -283,7 +282,7 @@ function generateTypescriptLocaleTyping(locale) {
 function generateTypescriptConstantsTyping(constants) {
   const typingFile = formatTypeScriptFile`
     ${constants
-      .map((c) => `export const ${c.name}: ${c.type.names.join(' | ')}`)
+      .map((c) => `export const ${c.name}: ${c.type?.names.join(' | ')}`)
       .join('\n')}
   `
   writeFile(`src/constants/index.d.ts`, typingFile)
@@ -293,7 +292,7 @@ function generateTypeScriptTypings(fns, aliases, locales, constants) {
   const nonFPFns = fns.filter((fn) => !fn.isFPFn)
   const fpFns = fns.filter((fn) => fn.isFPFn)
   const constantsDefinitions = constants.map(
-    (c) => `const ${c.name}: ${c.type.names.join(' | ')}`
+    (c) => `const ${c.name}: ${c.type?.names.join(' | ')}`
   )
 
   const moduleDefinitions = [
@@ -420,7 +419,7 @@ function generateTypeScriptTypings(fns, aliases, locales, constants) {
         nonFPFns
           .map(getTypeScriptInterfaceDefinition)
           .concat(
-            constants.map((c) => `${c.name}: ${c.type.names.join(' | ')}`)
+            constants.map((c) => `${c.name}: ${c.type?.names.join(' | ')}`)
           ),
         '\n'
       )}

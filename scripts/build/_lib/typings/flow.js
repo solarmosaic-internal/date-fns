@@ -36,7 +36,7 @@ const getFlowFPTypeAliases = (arity = 4) =>
 function getFlowTypeAlias(type) {
   const { title, properties, content } = type
   return `export type ${title} = ${
-    properties ? getParams(properties) : content.type.names.join(' | ')
+    properties ? getParams(properties) : content.type?.names.join(' | ')
   }`
 }
 
@@ -45,7 +45,7 @@ function generateFlowFnTyping(fn, aliasDeclarations) {
 
   const params = getParams(args, { leftBorder: '(', rightBorder: ')' })
   const returns = getType(
-    content.returns && content.returns[0] && content.returns[0].type.names,
+    content.returns && content.returns[0] && content.returns[0].type?.names,
     { flowType: true }
   )
 
@@ -64,7 +64,7 @@ function generateFlowFnIndexTyping(fns, aliasDeclarations, constants) {
   const fnsDeclarations = fns.map(({ title, args, content }) => {
     const params = getParams(args, { leftBorder: '(', rightBorder: ')' })
     const returns = getType(
-      content.returns && content.returns[0] && content.returns[0].type.names,
+      content.returns && content.returns[0] && content.returns[0].type?.names,
       { flowType: true }
     )
     return `${title}: ${params} => ${returns}`
@@ -89,7 +89,7 @@ function generateFlowFPFnTyping(fn, aliasDeclarations) {
 
   const type = getFPFnType(
     args,
-    content.returns && content.returns[0].type.names,
+    content.returns && content.returns[0].type?.names,
     {
       flowType: true,
     }
@@ -111,7 +111,7 @@ function generateFlowFPFnIndexTyping(fns, aliasDeclarations, constants) {
     ({ title, args, content }) =>
       `${title}: ${getFPFnType(
         args,
-        content.returns && content.returns[0] && content.returns[0].type.names,
+        content.returns && content.returns[0] && content.returns[0].type?.names,
         {
           flowType: true,
         }
@@ -193,7 +193,7 @@ function generateFlowTypings(fns, aliases, locales, constants) {
 }
 
 function generateConstantsDeclarations(constants) {
-  return constants.map((c) => `${c.name}: ${c.type.names.join(' | ')}`)
+  return constants.map((c) => `${c.name}: ${c.type?.names.join(' | ')}`)
 }
 
 function writeFile(relativePath, content) {

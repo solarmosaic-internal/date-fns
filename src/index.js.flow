@@ -1,0 +1,127 @@
+// @flow
+// This file is generated automatically by `scripts/build/typings.js`. Please, don't change it.
+
+export type Interval = {
+  start: Date | number,
+  end: Date | number,
+}
+
+export type Locale = {
+  code?: string,
+  formatDistance?: (...args: Array<any>) => any,
+  formatRelative?: (...args: Array<any>) => any,
+  localize?: {
+    ordinalNumber: (...args: Array<any>) => any,
+    era: (...args: Array<any>) => any,
+    quarter: (...args: Array<any>) => any,
+    month: (...args: Array<any>) => any,
+    day: (...args: Array<any>) => any,
+    dayPeriod: (...args: Array<any>) => any,
+  },
+  formatLong?: {
+    date: (...args: Array<any>) => any,
+    time: (...args: Array<any>) => any,
+    dateTime: (...args: Array<any>) => any,
+  },
+  match?: {
+    ordinalNumber: (...args: Array<any>) => any,
+    era: (...args: Array<any>) => any,
+    quarter: (...args: Array<any>) => any,
+    month: (...args: Array<any>) => any,
+    day: (...args: Array<any>) => any,
+    dayPeriod: (...args: Array<any>) => any,
+  },
+  options?: {
+    weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6,
+    firstWeekContainsDate?: 1 | 2 | 3 | 4 | 5 | 6 | 7,
+  },
+}
+
+export type Duration = {
+  years?: number,
+  months?: number,
+  weeks?: number,
+  days?: number,
+  hours?: number,
+  minutes?: number,
+  seconds?: number,
+}
+
+export type Day = 0 | 1 | 2 | 3 | 4 | 5 | 6
+
+declare module.exports: {
+  add: (date: any, duration: any) => void,
+
+  differenceInDays: (dateLeft: any, dateRight: any) => void,
+
+  format: (date: any, format: any, options: any) => void,
+
+  formatDistance: (date: any, baseDate: any, options: any) => void,
+
+  getHours: (date: any) => void,
+
+  isDate: (value: any) => void,
+
+  isSaturday: (date: any) => void,
+
+  isSunday: (date: any) => void,
+
+  isValid: (date: any) => void,
+
+  parse: (
+    dateString: any,
+    formatString: any,
+    referenceDate: any,
+    options: any
+  ) => void,
+
+  parseISO: (argument: any, options: any) => void,
+
+  sub: (date: any, duration: any) => void,
+
+  daysInWeek: number,
+
+  daysInYear: number,
+
+  maxTime: number,
+
+  millisecondsInWeek: number,
+
+  millisecondsInDay: number,
+
+  millisecondsInMinute: number,
+
+  millisecondsInHour: number,
+
+  millisecondsInSecond: number,
+
+  minTime: number,
+
+  minutesInYear: number,
+
+  minutesInMonth: number,
+
+  minutesInDay: number,
+
+  minutesInHour: number,
+
+  monthsInQuarter: number,
+
+  monthsInYear: number,
+
+  quartersInYear: number,
+
+  secondsInHour: number,
+
+  secondsInMinute: number,
+
+  secondsInDay: number,
+
+  secondsInWeek: number,
+
+  secondsInYear: number,
+
+  secondsInMonth: number,
+
+  secondsInQuarter: number,
+}

@@ -16,15 +16,12 @@ function getParams(params, { leftBorder = '{', rightBorder = '}' } = {}) {
 
   const formattedParams = addSeparator(
     params.map((param) => {
-      const {
-        name,
-        props,
-        optional,
-        variable,
-        type: { names: typeNames },
-      } = param
+      const { name, props, optional, variable, type: typeParam } = param
+      const typeNames = typeParam?.names || []
       const type = getType(typeNames, { props, forceArray: variable })
-      return `${variable ? '...' : ''}${name}${optional ? '?' : ''}: ${type}`
+      return `${variable ? '...' : ''}${name}${optional ? '?' : ''}: ${
+        type || 'any'
+      }`
     }),
     ','
   )
@@ -94,7 +91,7 @@ function getFPFnType(params, returns, { flowType = false } = {}) {
     return `() => ${getType(returns, { flowType })}`
   }
   const fpParamTypes = params.map((param) =>
-    getType(param.type.names, { props: param.props, flowType })
+    getType(param.type?.names, { props: param.props, flowType })
   )
 
   const arity = fpParamTypes.length

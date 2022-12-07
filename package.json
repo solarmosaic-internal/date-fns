@@ -20,6 +20,7 @@
   "main": "index.js",
   "module": "esm/index.js",
   "scripts": {
+    "build": "./scripts/build/package.sh",
     "test": "karma start config/karma.js",
     "lint": "eslint .",
     "lint-types": "eslint --config=.ts-eslintrc.js typings.d.ts",
